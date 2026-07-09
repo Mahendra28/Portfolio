@@ -20,24 +20,24 @@ import heroImage from './assets/portfolio-hero.png';
 
 const profile = {
   name: 'Mahendra',
-  role: 'Frontend Developer',
+  role: 'Fullstack Developer',
   tagline: 'I build responsive, fast, and interactive web experiences.',
   summary:
-    'A React developer focused on clean interfaces, useful details, and smooth user experiences across every device.',
-  email: 'mahendra@example.com',
+    'A Fullstack developer focused on clean interfaces, useful details and smooth user experiences across every device.',
+  email: 'mahendrasinghs28@gmail.com',
   location: 'India',
   resumeUrl: '#',
   socials: {
-    github: 'https://github.com/',
-    linkedin: 'https://www.linkedin.com/',
+    github: 'https://github.com/Mahendra28',
+    linkedin: 'https://www.linkedin.com/in/mahendra-singh-8ab89295/',
   },
 };
 
 const navItems = ['Home', 'About', 'Skills', 'Projects', 'Experience', 'Contact'];
 
 const stats = [
-  { value: '12+', label: 'Projects' },
-  { value: '2+', label: 'Years Learning' },
+  { value: '5+', label: 'Projects' },
+  { value: '8+', label: 'Years Learning' },
   { value: '99%', label: 'Responsive Focus' },
 ];
 
@@ -177,7 +177,7 @@ function App() {
           <div className="hero-copy">
             <span className="eyebrow">
               <Sparkles size={16} />
-              Available for frontend projects
+              Available for fullstack projects
             </span>
             <h1>
               Hi, I am {profile.name}. <span>{profile.role}</span>
