@@ -1,53 +1,553 @@
-import React, { useEffect, useMemo, useState } from 'react';
-import { ArrowDownRight, ArrowUpRight, Award, Github, Linkedin, Mail, Menu, Sparkles, X } from 'lucide-react';
-import heroImage from './assets/portfolio-hero.png';
+import React, { useEffect, useMemo, useState } from "react";
+import {
+  ArrowDownRight,
+  ArrowUpRight,
+  Award,
+  Github,
+  Linkedin,
+  Mail,
+  Menu,
+  Sparkles,
+  X,
+} from "lucide-react";
+import heroImage from "./assets/portfolio-hero.png";
+import continuousPatching from "./assets/02_Continous_Patching.png";
+import codeInsight from "./assets/01_CodeInsight.png";
+import agile from "./assets/03_Agile.png";
+import apMhub from "./assets/04_ApMhub.png";
 
-const profile = { name: 'Mahendra Singh S', initials: 'MS', role: 'Technical Project Manager | Software Engineer | Agile Delivery Lead | Software Engineering', tagline: 'Technical Project Manager / Scrum Master with 8+ years of experience spanning Agile software delivery, cross-functional team leadership, and enterprise application development.', summary: 'Experienced in the Healthcare IT and Publishing domains, with a strong technical foundation in Java, Spring Boot, and RESTful services.', email: 'Mahendrasinghs28@gmail.com', phone: '+91 8553366498', location: 'Bengaluru, Karnataka, India', socials: { github: 'https://github.com/Mahendra28', linkedin: 'https://www.linkedin.com/in/mahendra-singh-8ab89295/' } };
+const profile = {
+  name: "Mahendra Singh S",
+  initials: "MS",
+  role: "Technical Project Manager | Scrum Master | Agile Delivery Lead | Software Engineering",
+  tagline:
+    "Technical Project Manager / Scrum Master with 8+ years of experience spanning Agile software delivery, cross-functional team leadership and enterprise application development.",
+  summary:
+    "Experienced in the Healthcare IT and Publishing domains, with a strong technical foundation in Java, Spring Boot, and RESTful services.",
+  email: "Mahendrasinghs28@gmail.com",
+  phone: "+91 8553366498",
+  location: "Bengaluru, Karnataka, India",
+  socials: {
+    github: "https://github.com/Mahendra28",
+    linkedin: "https://www.linkedin.com/in/mahendra-singh-8ab89295/",
+  },
+};
 const skillGroups = [
-  { label: 'Project & Agile Management Tools', items: ['Jira', 'Confluence', 'Trello', 'Azure DevOps', 'MS Project', 'Smartsheet', 'Kanban Boards', 'Sprint/Release Planning Boards'] },
-  { label: 'Agile Frameworks', items: ['Scrum', 'Kanban', 'SAFe (Scaled Agile) Awareness', 'Hybrid Agile-Waterfall Delivery'] },
-  { label: 'Programming & Frameworks', items: ['Java', 'Spring Boot Framework', 'RESTful Web Services', 'JavaScript', 'ReactJS', 'HTML', 'CSS', 'SQL'] },
-  { label: 'Version Control & Dev Practices', items: ['Git/GitHub', 'SDLC', 'Testing Methodologies', 'Code Optimization', 'Code Reviews', 'CI/CD Awareness'] },
-  { label: 'Security & Quality', items: ['Vulnerability Remediation & Security Coordination', 'Problem Diagnosis', 'Process Improvement', 'Root Cause Analysis'] },
-  { label: 'Reporting & Collaboration', items: ['MS Excel', 'MS PowerPoint', 'MS Word', 'Visio (Process/Flow Diagrams)', 'Slack', 'MS Teams', 'Zoom'] },
-  { label: 'Domains', items: ['Healthcare IT', 'Publishing / Content Management'] },
-  { label: 'Leadership & Soft Skills', items: ['Team Leadership', 'Mentoring & Coaching', 'Analytical Mindset', 'Adaptability', 'Time Management', 'Attention to Detail'] },
+  {
+    label: "Project & Agile Management Tools",
+    items: [
+      "Jira",
+      "Confluence",
+      "Trello",
+      "Azure DevOps",
+      "MS Project",
+      "Smartsheet",
+      "Kanban Boards",
+      "Sprint/Release Planning Boards",
+    ],
+  },
+  {
+    label: "Agile Frameworks",
+    items: [
+      "Scrum",
+      "Kanban",
+      "SAFe (Scaled Agile) Awareness",
+      "Hybrid Agile-Waterfall Delivery",
+    ],
+  },
+  {
+    label: "Programming & Frameworks",
+    items: [
+      "Java",
+      "Spring Boot Framework",
+      "RESTful Web Services",
+      "JavaScript",
+      "ReactJS",
+      "HTML",
+      "CSS",
+      "SQL",
+    ],
+  },
+  {
+    label: "Version Control & Dev Practices",
+    items: [
+      "Git/GitHub",
+      "SDLC",
+      "Testing Methodologies",
+      "Code Optimization",
+      "Code Reviews",
+      "CI/CD Awareness",
+    ],
+  },
+  {
+    label: "Security & Quality",
+    items: [
+      "Vulnerability Remediation & Security Coordination",
+      "Problem Diagnosis",
+      "Process Improvement",
+      "Root Cause Analysis",
+    ],
+  },
+  {
+    label: "Reporting & Collaboration",
+    items: [
+      "MS Excel",
+      "MS PowerPoint",
+      "MS Word",
+      "Visio (Process/Flow Diagrams)",
+      "Slack",
+      "MS Teams",
+      "Zoom",
+    ],
+  },
+  {
+    label: "Domains",
+    items: ["Healthcare IT", "Publishing / Content Management"],
+  },
+  {
+    label: "Leadership & Soft Skills",
+    items: [
+      "Team Leadership",
+      "Mentoring & Coaching",
+      "Analytical Mindset",
+      "Adaptability",
+      "Time Management",
+      "Attention to Detail",
+    ],
+  },
 ];
-const competencies = ['Agile/Scrum Delivery', 'Sprint Planning & Backlog Management', 'Release Planning', 'Risk & Issue Management', 'Cross-Functional Team Leadership', 'Stakeholder Management', 'Requirement Gathering', 'Client Communication', 'Executive Reporting', 'Solution Design', 'Technical Mentorship', 'SDLC Governance', 'Vulnerability Remediation & Security Coordination'];
+const competencies = [
+  "Agile/Scrum Delivery",
+  "Sprint Planning & Backlog Management",
+  "Release Planning",
+  "Risk & Issue Management",
+  "Cross-Functional Team Leadership",
+  "Stakeholder Management",
+  "Requirement Gathering",
+  "Client Communication",
+  "Executive Reporting",
+  "Solution Design",
+  "Technical Mentorship",
+  "SDLC Governance",
+  "Vulnerability Remediation & Security Coordination",
+];
 const highlights = [
-  { title: 'Code Insight', type: 'Healthcare IT', description: 'Led end-to-end delivery of an internal developer-productivity tool adopted by 30+ developers across 5+ teams, reducing average code/ticket lookup time by 25% while coordinating cross-functional stakeholders to align priorities, scope, and delivery timelines.', stack: ['30+ developers', '5+ teams', '25% faster lookup'] },
-  { title: 'Continuous Patching', type: 'Healthcare IT', description: 'Directed delivery of an automated vulnerability-remediation platform covering 50+ applications, reducing manual security-patching effort by 60% and average remediation time by 30%.', stack: ['50+ applications', '60% less manual effort', '30% faster remediation'] },
-  { title: 'Agile Delivery Leadership', type: 'Agile Delivery', description: 'Facilitated sprint planning, daily stand-ups, sprint reviews, and retrospectives across 60+ sprint cycles for a team of 8 engineers, removing impediments and improving sprint velocity by 20%.', stack: ['60+ sprint cycles', '8 engineers', '20% velocity improvement'] },
-  { title: 'AP-Mhub / Struct app', type: 'Publishing', description: "Contributed to the integration of multiple applications into a unified platform for Elsevier's publishing business, supporting improved data accuracy and streamlined workflows for content authors.", stack: ['Elsevier', 'Application integration', 'Content workflows'] },
+  {
+    title: "Code Insight",
+    type: "Healthcare IT",
+    description:
+      "Led end-to-end delivery of an internal developer-productivity tool adopted by 30+ developers across 5+ teams, reducing average code/ticket lookup time by 25% while coordinating cross-functional stakeholders to align priorities, scope, and delivery timelines.",
+    stack: ["30+ developers", "5+ teams", "25% faster lookup"],
+    image: codeInsight,
+  },
+  {
+    title: "Continuous Patching",
+    type: "Healthcare IT",
+    description:
+      "Directed delivery of an automated vulnerability-remediation platform covering 50+ applications, reducing manual security-patching effort by 60% and average remediation time by 30%.",
+    stack: [
+      "50+ applications",
+      "60% less manual effort",
+      "30% faster remediation",
+    ],
+    image: continuousPatching,
+  },
+  {
+    title: "Agile Delivery Leadership",
+    type: "Agile Delivery",
+    description:
+      "Facilitated sprint planning, daily stand-ups, sprint reviews, and retrospectives across 60+ sprint cycles for a team of 8 engineers, removing impediments and improving sprint velocity by 20%.",
+    stack: ["60+ sprint cycles", "8 engineers", "20% velocity improvement"],
+    image: agile,
+  },
+  {
+    title: "AP-Mhub / Struct app",
+    type: "Publishing",
+    description:
+      "Contributed to the integration of multiple applications into a unified platform for Elsevier's publishing business, supporting improved data accuracy and streamlined workflows for content authors.",
+    stack: ["Elsevier", "Application integration", "Content workflows"],
+    image: apMhub,
+  },
 ];
 const timeline = [
-  { year: '2018 - 2024', title: 'Software Engineer II (Technical Lead & Agile Delivery)', company: 'Oracle Cerner Healthcare Solutions India Pvt Ltd, Bengaluru', text: 'Partnered with product owners and 10+ business stakeholders to translate requirements into actionable sprint backlogs, achieving 90% on-time delivery of healthcare software releases.' },
-  { year: '2016 - 2018', title: 'Software Engineer', company: 'Parity Computing India Pvt Ltd, Bengaluru', text: 'Started a career in software engineering, building a strong foundation in SDLC and Agile practices through structured, process-driven software delivery.' },
-  { year: '2016', title: 'Master of Computer Applications (MCA)', company: 'Dayananda Sagar College of Engineering, Bengaluru', text: 'Education' },
+  {
+    year: "2018 - 2024",
+    title: "Software Engineer II (Technical Lead & Agile Delivery)",
+    company: "Oracle Cerner Healthcare Solutions India Pvt Ltd, Bengaluru",
+    text: "Partnered with product owners and 10+ business stakeholders to translate requirements into actionable sprint backlogs, achieving 90% on-time delivery of healthcare software releases.",
+  },
+  {
+    year: "2016 - 2018",
+    title: "Software Engineer",
+    company: "Parity Computing India Pvt Ltd, Bengaluru",
+    text: "Started a career in software engineering, building a strong foundation in SDLC and Agile practices through structured, process-driven software delivery.",
+  },
+  {
+    year: "2016",
+    title: "Master of Computer Applications (MCA)",
+    company: "Dayananda Sagar College of Engineering, Bengaluru",
+    text: "Education",
+  },
 ];
-const navItems = [{ label: 'About', target: 'about' }, { label: 'Experience', target: 'work' }, { label: 'Skills', target: 'stack' }, { label: 'Contact', target: 'contact' }];
-const scrollToId = (id) => document.getElementById(id)?.scrollIntoView({ behavior: 'smooth', block: 'start' });
-function BackgroundEffects() { return <div className="background-effects" aria-hidden="true"><i /><i /><i /><b /></div>; }
-function LoadingScreen() { return <div className="loading-screen" aria-hidden="true"><div className="loader-mark"><span>M</span></div><p>Technical Project Manager</p></div>; }
+const navItems = [
+  { label: "About", target: "about" },
+  { label: "Experience", target: "work" },
+  { label: "Skills", target: "stack" },
+  { label: "Contact", target: "contact" },
+];
+const scrollToId = (id) =>
+  document
+    .getElementById(id)
+    ?.scrollIntoView({ behavior: "smooth", block: "start" });
+function BackgroundEffects() {
+  return (
+    <div className="background-effects" aria-hidden="true">
+      <i />
+      <i />
+      <i />
+      <b />
+    </div>
+  );
+}
+function LoadingScreen() {
+  return (
+    <div className="loading-screen" aria-hidden="true">
+      <div className="loader-mark">
+        <span>M</span>
+      </div>
+      <p>Technical Project Manager</p>
+    </div>
+  );
+}
 
 function App() {
-  const [menuOpen, setMenuOpen] = useState(false); const [loading, setLoading] = useState(true); const [leavingLoader, setLeavingLoader] = useState(false); const [activeSection, setActiveSection] = useState('about'); const [activeFilter, setActiveFilter] = useState('All');
-  const filters = useMemo(() => ['All', ...new Set(highlights.map((item) => item.type))], []); const visibleHighlights = activeFilter === 'All' ? highlights : highlights.filter((item) => item.type === activeFilter);
-  useEffect(() => { const beginExit = window.setTimeout(() => setLeavingLoader(true), 850); const finishExit = window.setTimeout(() => setLoading(false), 1300); return () => { window.clearTimeout(beginExit); window.clearTimeout(finishExit); }; }, []);
-  useEffect(() => { const sections = ['about', 'work', 'stack', 'contact'].map((id) => document.getElementById(id)).filter(Boolean); const observer = new IntersectionObserver((entries) => entries.forEach((entry) => entry.isIntersecting && setActiveSection(entry.target.id)), { rootMargin: '-35% 0px -55% 0px' }); sections.forEach((section) => observer.observe(section)); return () => observer.disconnect(); }, []);
-  const goTo = (id) => { scrollToId(id); setMenuOpen(false); };
-  return <div className="site-shell">
-    {loading && <div className={leavingLoader ? 'loader-exit' : ''}><LoadingScreen /></div>}<BackgroundEffects />
-    <header className="navbar"><a className="brand" href="#home" aria-label="Go to home"><span>{profile.initials}</span></a><nav className={`nav-links ${menuOpen ? 'open' : ''}`} aria-label="Primary navigation">{navItems.map((item) => <a className={activeSection === item.target ? 'active' : ''} key={item.target} href={`#${item.target}`} onClick={() => setMenuOpen(false)}>{item.label}</a>)}</nav><button className="menu-button" onClick={() => setMenuOpen((open) => !open)} aria-label={menuOpen ? 'Close menu' : 'Open menu'} aria-expanded={menuOpen}>{menuOpen ? <X /> : <Menu />}</button></header>
-    <aside className="social-rail" aria-label="Social links"><a href={profile.socials.github} target="_blank" rel="noreferrer" aria-label="GitHub"><Github size={17} /><span>GitHub</span></a><a href={profile.socials.linkedin} target="_blank" rel="noreferrer" aria-label="LinkedIn"><Linkedin size={17} /><span>LinkedIn</span></a><i /></aside>
-    <main>
-      <section id="home" className="hero"><div className="hero-copy reveal"><p className="eyebrow"><Sparkles size={14} /> {profile.role}</p><p className="hello">Hello! I'm</p><h1>Mahendra<br />Singh</h1><h2>Technical Project Manager<br /><em>& Software Engineer.</em></h2><p className="hero-summary">{profile.summary}</p><div className="hero-actions"><button className="button-primary" onClick={() => goTo('work')}>View experience <ArrowDownRight size={18} /></button><a className="text-link" href={`mailto:${profile.email}`}>Get in touch <ArrowUpRight size={17} /></a></div></div><div className="hero-portrait reveal"><div className="orbit orbit-one" /><div className="orbit orbit-two" /><div className="portrait-frame"><img src={heroImage} alt="A modern developer workspace" /></div><p className="portrait-note">{profile.location} <span>•</span> 8+ years of experience</p></div><a className="scroll-cue" href="#about">Scroll to discover <span /></a></section>
-      <section id="about" className="section about-section"><div className="section-intro reveal"><p className="eyebrow">01 / Professional summary</p><h2>Agile delivery.<br /><em>Technical depth.</em></h2></div><div className="about-copy reveal"><p className="lead">{profile.tagline}</p><p>Led Agile delivery for cross-functional teams of 8+ engineers across 60+ sprint cycles, improving on-time release delivery by 20% through structured sprint planning, backlog prioritization, and risk mitigation.</p><p>Bridges business and engineering teams through requirement gathering, release planning, and executive reporting to 10+ stakeholder groups. Mentored 5+ junior engineers and was recognized twice with the Cerner NOTT Award and with the Cerner Bravo Recognition.</p><div className="mini-facts"><span><b>8+</b> years of experience</span><span><b>60+</b> sprint cycles</span><span><b>90%</b> on-time delivery</span></div></div><div className="timeline" aria-label="Career timeline">{timeline.map((item, index) => <article className="timeline-item reveal" key={item.title}><span className="timeline-index">0{index + 1}</span><time>{item.year}</time><div><h3>{item.title}</h3><strong>{item.company}</strong><p>{item.text}</p></div></article>)}</div></section>
-      <section id="work" className="section work-section"><div className="section-heading reveal"><p className="eyebrow">02 / Delivery highlights</p><h2>Selected <em>impact</em></h2><p>Delivery outcomes from Healthcare IT and Publishing / Content Management.</p></div><div className="filter-group reveal" aria-label="Filter delivery highlights">{filters.map((filter) => <button key={filter} className={activeFilter === filter ? 'active' : ''} onClick={() => setActiveFilter(filter)}>{filter}</button>)}</div><div className="project-list">{visibleHighlights.map((item, index) => <article className="project-card reveal" key={item.title}><div className="project-art"><Award size={index % 2 ? 54 : 70} /><span>{String(index + 1).padStart(2, '0')}</span></div><div className="project-content"><p className="project-type">{item.type}</p><h3>{item.title}</h3><p>{item.description}</p><div className="stack-list">{item.stack.map((entry) => <span key={entry}>{entry}</span>)}</div></div></article>)}</div></section>
-      <section id="stack" className="section stack-section"><div className="section-heading reveal"><p className="eyebrow">03 / Core competencies & technical skills</p><h2>Tools and practices<br />for <em>delivery.</em></h2></div><div className="competency-list reveal">{competencies.map((item) => <span key={item}>{item}</span>)}</div><div className="skill-groups">{skillGroups.map((group) => <article className="skill-group reveal" key={group.label}><h3>{group.label}</h3><p>{group.items.join(' • ')}</p></article>)}</div></section>
-      <section id="contact" className="section contact-section"><div className="contact-copy reveal"><p className="eyebrow">04 / Contact</p><h2>Let's create meaningful <em>delivery impact.</em></h2><p>{profile.location}<br />{profile.phone}</p><a className="email-link" href={`mailto:${profile.email}`}>{profile.email}<ArrowUpRight size={24} /></a><div className="contact-socials"><a href={profile.socials.github} target="_blank" rel="noreferrer">GitHub</a><a href={profile.socials.linkedin} target="_blank" rel="noreferrer">LinkedIn</a></div></div><div className="recognition-card reveal"><p className="eyebrow">Recognition & development</p><h3>Achievements</h3><p>Awarded the Cerner NOTT Award twice (June 2019 and August 2020) in recognition of exceptional technical skills and outstanding contributions to project success.</p><p>Received the Cerner Bravo Recognition in May 2021 for a strong commitment to delivering high-quality work, meeting deadlines, and exceeding client expectations.</p><h3>Certification</h3><p>Core Java and Advanced Java (NASSCOM)</p><h3>Professional development</h3><p>Building on 8+ years of Agile software delivery experience to transition into dedicated Technical Project Manager / Scrum Master roles. Actively upskilling in Agile Project Management, Scrum frameworks, and stakeholder leadership through structured, self-directed study.</p></div></section>
-    </main>
-    <button className="contact-float" onClick={() => goTo('contact')} aria-label="Go to contact section"><Mail size={19} /></button><footer><span>{profile.initials}</span><p>© {new Date().getFullYear()} {profile.name}. Technical Project Manager | Scrum Master | Agile Delivery Lead</p><a href="#home">Back to top <ArrowUpRight size={14} /></a></footer>
-  </div>;
+  const [menuOpen, setMenuOpen] = useState(false);
+  const [loading, setLoading] = useState(true);
+  const [leavingLoader, setLeavingLoader] = useState(false);
+  const [activeSection, setActiveSection] = useState("about");
+  const [activeFilter, setActiveFilter] = useState("All");
+  const filters = useMemo(
+    () => ["All", ...new Set(highlights.map((item) => item.type))],
+    [],
+  );
+  const visibleHighlights =
+    activeFilter === "All"
+      ? highlights
+      : highlights.filter((item) => item.type === activeFilter);
+  useEffect(() => {
+    const beginExit = window.setTimeout(() => setLeavingLoader(true), 850);
+    const finishExit = window.setTimeout(() => setLoading(false), 1300);
+    return () => {
+      window.clearTimeout(beginExit);
+      window.clearTimeout(finishExit);
+    };
+  }, []);
+  useEffect(() => {
+    const sections = ["about", "work", "stack", "contact"]
+      .map((id) => document.getElementById(id))
+      .filter(Boolean);
+    const observer = new IntersectionObserver(
+      (entries) =>
+        entries.forEach(
+          (entry) => entry.isIntersecting && setActiveSection(entry.target.id),
+        ),
+      { rootMargin: "-35% 0px -55% 0px" },
+    );
+    sections.forEach((section) => observer.observe(section));
+    return () => observer.disconnect();
+  }, []);
+  const goTo = (id) => {
+    scrollToId(id);
+    setMenuOpen(false);
+  };
+  return (
+    <div className="site-shell">
+      {loading && (
+        <div className={leavingLoader ? "loader-exit" : ""}>
+          <LoadingScreen />
+        </div>
+      )}
+      <BackgroundEffects />
+      <header className="navbar">
+        <a className="brand" href="#home" aria-label="Go to home">
+          <span>{profile.initials}</span>
+        </a>
+        <div className="lead">
+          Mahendrasinghs28@gmail.com  |  +91 8553366498
+        </div>
+        <nav
+          className={`nav-links ${menuOpen ? "open" : ""}`}
+          aria-label="Primary navigation"
+        >
+          {navItems.map((item) => (
+            <a
+              className={activeSection === item.target ? "active" : ""}
+              key={item.target}
+              href={`#${item.target}`}
+              onClick={() => setMenuOpen(false)}
+            >
+              {item.label}
+            </a>
+          ))}
+        </nav>
+        <button
+          className="menu-button"
+          onClick={() => setMenuOpen((open) => !open)}
+          aria-label={menuOpen ? "Close menu" : "Open menu"}
+          aria-expanded={menuOpen}
+        >
+          {menuOpen ? <X /> : <Menu />}
+        </button>
+      </header>
+      <aside className="social-rail" aria-label="Social links">
+        <a
+          href={profile.socials.github}
+          target="_blank"
+          rel="noreferrer"
+          aria-label="GitHub"
+        >
+          <Github size={17} />
+          <span>GitHub</span>
+        </a>
+        <a
+          href={profile.socials.linkedin}
+          target="_blank"
+          rel="noreferrer"
+          aria-label="LinkedIn"
+        >
+          <Linkedin size={17} />
+          <span>LinkedIn</span>
+        </a>
+        <i />
+      </aside>
+      <main>
+        <section id="home" className="hero">
+          <div className="hero-copy reveal">
+            <p className="eyebrow">
+              <Sparkles size={14} /> {profile.role}
+            </p>
+            <p className="hello">Hello! I'm</p>
+            <h1>
+              Mahendra
+              <br />
+              Singh
+            </h1>
+            <h2>
+              Technical Project Manager
+              <br />
+              <em>& Software Engineer.</em>
+            </h2>
+            <p className="hero-summary">{profile.summary}</p>
+            <div className="hero-actions">
+              <button className="button-primary" onClick={() => goTo("work")}>
+                View experience <ArrowDownRight size={18} />
+              </button>
+              <a className="text-link" href={`mailto:${profile.email}`}>
+                Get in touch <ArrowUpRight size={17} />
+              </a>
+            </div>
+          </div>
+          <div className="hero-portrait reveal">
+            <div className="orbit orbit-one" />
+            <div className="orbit orbit-two" />
+            <div className="portrait-frame">
+              <img src={heroImage} alt="A modern developer workspace" />
+            </div>
+            <p className="portrait-note">
+              {profile.location} <span>•</span> 8+ years of experience
+            </p>
+          </div>
+        </section>
+        <section id="about" className="section about-section">
+          <div className="section-intro reveal">
+            <p className="eyebrow">01 / Professional summary</p>
+            <h2>
+              Agile delivery.
+              <br />
+              <em>Technical depth.</em>
+            </h2>
+          </div>
+          <div className="about-copy reveal">
+            <p className="lead">{profile.tagline}</p>
+            <p>
+              Led Agile delivery for cross-functional teams of 8+ engineers
+              across 60+ sprint cycles, improving on-time release delivery by
+              20% through structured sprint planning, backlog prioritization,
+              and risk mitigation.
+            </p>
+            <p>
+              Bridges business and engineering teams through requirement
+              gathering, release planning, and executive reporting to 10+
+              stakeholder groups. Mentored 5+ junior engineers and was
+              recognized twice with the Cerner NOTT Award and with the Cerner
+              Bravo Recognition.
+            </p>
+            <div className="mini-facts">
+              <span>
+                <b>8+</b> years of experience
+              </span>
+              <span>
+                <b>60+</b> sprint cycles
+              </span>
+              <span>
+                <b>90%</b> on-time delivery
+              </span>
+            </div>
+          </div>
+          <div className="timeline" aria-label="Career timeline">
+            {timeline.map((item, index) => (
+              <article className="timeline-item reveal" key={item.title}>
+                <span className="timeline-index">0{index + 1}</span>
+                <time>{item.year}</time>
+                <div>
+                  <h3>{item.title}</h3>
+                  <strong>{item.company}</strong>
+                  <p>{item.text}</p>
+                </div>
+              </article>
+            ))}
+          </div>
+        </section>
+        <section id="work" className="section work-section">
+          <div className="section-heading reveal">
+            <p className="eyebrow">02 / Delivery highlights</p>
+            <h2>
+              Selected <em>impact</em>
+            </h2>
+            <p>
+              Delivery outcomes from Healthcare IT and Publishing / Content
+              Management.
+            </p>
+          </div>
+          <div
+            className="filter-group reveal"
+            aria-label="Filter delivery highlights"
+          >
+            {filters.map((filter) => (
+              <button
+                key={filter}
+                className={activeFilter === filter ? "active" : ""}
+                onClick={() => setActiveFilter(filter)}
+              >
+                {filter}
+              </button>
+            ))}
+          </div>
+          <div className="project-list">
+            {visibleHighlights.map((item, index) => (
+              <article className="project-card reveal" key={item.title}>
+                <div className="project-art">
+                  <img src={item.image} />
+                </div>
+                <div className="project-content">
+                  <p className="project-type">{item.type}</p>
+                  <h3>{item.title}</h3>
+                  <p>{item.description}</p>
+                  <div className="stack-list">
+                    {item.stack.map((entry) => (
+                      <span key={entry}>{entry}</span>
+                    ))}
+                  </div>
+                </div>
+              </article>
+            ))}
+          </div>
+        </section>
+        <section id="stack" className="section stack-section">
+          <div className="section-heading reveal">
+            <p className="eyebrow">03 / Core competencies & technical skills</p>
+            <h2>
+              Tools and practices
+              <br />
+              for <em>delivery.</em>
+            </h2>
+          </div>
+          <div className="competency-list reveal">
+            {competencies.map((item) => (
+              <span key={item}>{item}</span>
+            ))}
+          </div>
+          <div className="skill-groups">
+            {skillGroups.map((group) => (
+              <article className="skill-group reveal" key={group.label}>
+                <h3>{group.label}</h3>
+                <p>{group.items.join(" • ")}</p>
+              </article>
+            ))}
+          </div>
+        </section>
+        <section id="contact" className="section contact-section">
+          <div className="contact-copy reveal">
+            <p className="eyebrow">04 / Contact</p>
+            <h2>
+              Let's create meaningful <em>delivery impact.</em>
+            </h2>
+            <p>
+              {profile.location}
+              <br />
+              {profile.phone}
+            </p>
+            <a className="email-link" href={`mailto:${profile.email}`}>
+              {profile.email}
+              <ArrowUpRight size={24} />
+            </a>
+            <div className="contact-socials">
+              <a href={profile.socials.github} target="_blank" rel="noreferrer">
+                GitHub
+              </a>
+              <a
+                href={profile.socials.linkedin}
+                target="_blank"
+                rel="noreferrer"
+              >
+                LinkedIn
+              </a>
+            </div>
+          </div>
+          <div className="recognition-card reveal">
+            <p className="eyebrow">Recognition & development</p>
+            <h3>Achievements</h3>
+            <p>
+              Awarded the Cerner NOTT Award twice (June 2019 and August 2020) in
+              recognition of exceptional technical skills and outstanding
+              contributions to project success.
+            </p>
+            <p>
+              Received the Cerner Bravo Recognition in May 2021 for a strong
+              commitment to delivering high-quality work, meeting deadlines, and
+              exceeding client expectations.
+            </p>
+            <h3>Certification</h3>
+            <p>Core Java and Advanced Java (NASSCOM)</p>
+            <h3>Professional development</h3>
+            <p>
+              Building on 8+ years of Agile software delivery experience to
+              transition into dedicated Technical Project Manager / Scrum Master
+              roles. Actively upskilling in Agile Project Management, Scrum
+              frameworks, and stakeholder leadership through structured,
+              self-directed study.
+            </p>
+          </div>
+        </section>
+      </main>
+      <button
+        className="contact-float"
+        onClick={() => goTo("contact")}
+        aria-label="Go to contact section"
+      >
+        <Mail size={19} />
+      </button>
+      <footer>
+        <span>{profile.initials}</span>
+        <p>
+          © {new Date().getFullYear()} {profile.name}. Technical Project Manager
+          | Scrum Master | Agile Delivery Lead
+        </p>
+        <a href="#home">
+          Back to top <ArrowUpRight size={14} />
+        </a>
+      </footer>
+    </div>
+  );
 }
 export default App;
