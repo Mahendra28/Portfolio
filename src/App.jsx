@@ -24,7 +24,7 @@ const profile = {
     "Technical Project Manager / Scrum Master with 8+ years of experience spanning Agile software delivery, cross-functional team leadership and enterprise application development.",
   summary:
     "Experienced in the Healthcare IT and Publishing domains, with a strong technical foundation in Java, Spring Boot, and RESTful services.",
-  email: "Mahendrasinghs28@gmail.com",
+  email: "Mahendrasinghprofessional@gmail.com",
   phone: "+91 8553366498",
   location: "Bengaluru, Karnataka, India",
   socials: {
@@ -273,7 +273,7 @@ function App() {
           <span>{profile.initials}</span>
         </a>
         <div className="lead">
-          Mahendrasinghs28@gmail.com  |  +91 8553366498
+          Mahendrasinghprofessional@gmail.com  |  +91 8553366498
         </div>
         <nav
           className={`nav-links ${menuOpen ? "open" : ""}`}
